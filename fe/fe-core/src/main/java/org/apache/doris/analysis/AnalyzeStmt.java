@@ -219,7 +219,7 @@ public class AnalyzeStmt extends DdlStmt {
 
         if (properties.containsKey(PROPERTY_SAMPLE_PERCENT)) {
             checkNumericProperty(PROPERTY_SAMPLE_PERCENT, properties.get(PROPERTY_SAMPLE_PERCENT),
-                    0, 100, false, "should be > 0 and < 100");
+                    1, 100, true, "should be >= 1 and <= 100");
         }
 
         if (properties.containsKey(PROPERTY_SAMPLE_ROWS)) {
@@ -342,7 +342,7 @@ public class AnalyzeStmt extends DdlStmt {
     @Override
     public String toSql() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ANALYZE");
+        sb.append("ANALYZE TABLE ");
 
         if (tableName != null) {
             sb.append(" ");
